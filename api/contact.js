@@ -2,6 +2,13 @@ import { Resend } from "resend";
 
 const TO_EMAIL = "sally014701@gmail.com";
 
+const corsHeaders = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
 function escapeHtml(str) {
   if (typeof str !== "string") return "";
   return str
@@ -12,36 +19,44 @@ function escapeHtml(str) {
     .replace(/'/g, "&#39;");
 }
 
-export default async function handler(req, res) {
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+function jsonResponse(body, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: corsHeaders,
+  });
+}
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
+export async function OPTIONS() {
+  return new Response(null, { status: 204, headers: corsHeaders });
+}
+
+export async function POST(request) {
+  let body;
+  try {
+    body = await request.json();
+  } catch (e) {
+    return jsonResponse(
+      { message: "요청 형식이 올바르지 않습니다." },
+      400
+    );
   }
 
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
-  const body = req.body || {};
+  body = body || {};
   const nameTrim = typeof body.name === "string" ? body.name.trim() : "";
   const phoneTrim = typeof body.phone === "string" ? body.phone.trim() : "";
   const emailTrim = typeof body.email === "string" ? body.email.trim() : "";
 
   if (!nameTrim || !phoneTrim || !emailTrim) {
-    return res.status(400).json({
+    return jsonResponse({
       message: "이름, 전화번호, 이메일을 모두 입력해 주세요.",
-    });
+    }, 400);
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    return res.status(503).json({
+    return jsonResponse({
       message: "메일 발송이 설정되지 않았습니다. RESEND_API_KEY를 확인해 주세요.",
-    });
+    }, 503);
   }
 
   const resend = new Resend(apiKey);
@@ -56,7 +71,7 @@ export default async function handler(req, res) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: "일본어 퀴즈 <onboarding@resend.dev>",
+      from: "Japan Quiz <onboarding@resend.dev>",
       to: [TO_EMAIL],
       subject: `[연락하기] ${escapeHtml(nameTrim)}님`,
       html,
@@ -64,16 +79,14 @@ export default async function handler(req, res) {
 
     if (error) {
       console.error("Resend error:", error);
-      return res.status(500).json({
-        message: "메일 발송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
-      });
+      const msg = error?.message || "메일 발송에 실패했습니다. 잠시 후 다시 시도해 주세요.";
+      return jsonResponse({ message: msg }, 500);
     }
 
-    return res.status(200).json({ success: true, id: data?.id });
+    return jsonResponse({ success: true, id: data?.id });
   } catch (err) {
     console.error("Contact send error:", err);
-    return res.status(500).json({
-      message: "메일 발송 중 오류가 발생했습니다.",
-    });
+    const msg = err?.message || "메일 발송 중 오류가 발생했습니다.";
+    return jsonResponse({ message: msg }, 500);
   }
 }
