@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-const TO_EMAIL = "sally014701@gmail.com";
+const TO_EMAIL = "sally014701@g.skku.edu";
 
 const corsHeaders = {
   "Content-Type": "application/json",
