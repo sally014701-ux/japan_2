@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日本語クイズ | 일본어 단어 퀴즈</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ghibli-bg">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+    <div class="leaf leaf-1"></div>
+    <div class="leaf leaf-2"></div>
+    <div class="leaf leaf-3"></div>
+  </div>
+  <div class="app">
+    <header class="header">
+      <h1>日本語クイズ</h1>
+      <p class="subtitle">일본어 단어 퀴즈</p>
+      <div class="stats" id="stats">
+        <span class="stat" id="score">점수: 0</span>
+        <span class="stat" id="progress">1 / 10</span>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="welcome" id="welcome">
+        <div class="welcome-card">
+          <h2>퀴즈 모드 선택</h2>
+          <div class="mode-buttons">
+            <button class="mode-btn" data-mode="ja-to-ko">일본어 → 한국어</button>
+            <button class="mode-btn" data-mode="ko-to-ja">한국어 → 일본어</button>
+          </div>
+          <p class="hint">단어를 보고 맞는 뜻을 고르세요.</p>
+        </div>
+      </section>
+
+      <section class="quiz hidden" id="quiz">
+        <div class="question-card">
+          <p class="question-label" id="questionLabel">이 단어의 뜻은?</p>
+          <p class="question-word" id="questionWord">水</p>
+          <div class="choices" id="choices"></div>
+        </div>
+        <div class="feedback hidden" id="feedback">
+          <p class="feedback-text" id="feedbackText"></p>
+          <button class="next-btn" id="nextBtn">다음</button>
+        </div>
+      </section>
+
+      <section class="result hidden" id="result">
+        <div class="result-card">
+          <h2>퀴즈 완료!</h2>
+          <p class="final-score" id="finalScore">0 / 10</p>
+          <p class="result-message" id="resultMessage"></p>
+          <button class="restart-btn" id="restartBtn">다시 하기</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>일본어 단어 퀴즈 · JLPT 스타일</p>
+      <button type="button" class="contact-btn" id="contactBtn">일본인 친구를 만나고 싶으면 누르세요</button>
+    </footer>
+  </div>
+
+  <!-- 연락하기 모달 -->
+  <div class="modal-overlay hidden" id="contactModal">
+    <div class="modal">
+      <button type="button" class="modal-close" id="modalClose" aria-label="닫기">×</button>
+      <h2 class="modal-title">연락하기</h2>
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="contactName">이름</label>
+          <input type="text" id="contactName" name="name" required placeholder="이름을 입력하세요">
+        </div>
+        <div class="form-group">
+          <label for="contactPhone">전화번호</label>
+          <input type="tel" id="contactPhone" name="phone" required placeholder="010-0000-0000">
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">이메일</label>
+          <input type="email" id="contactEmail" name="email" required placeholder="example@email.com">
+        </div>
+        <p class="form-message hidden" id="formMessage"></p>
+        <button type="submit" class="submit-btn" id="contactSubmit">제출하기</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
