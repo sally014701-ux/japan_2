@@ -9,8 +9,8 @@
   --paper-shadow: #e8e4d4;
   --ink: #3e2723;
   --ink-muted: #5d4e4a;
-  --accent: #c85a54;
-  --accent-soft: #ef9a9a;
+  --accent: #1b5e20;
+  --accent-soft: #a5d6a7;
   --success: #2e7d32;
   --success-soft: #a5d6a7;
   --error: #c62828;
@@ -292,7 +292,7 @@ body {
 
 .mode-btn:hover {
   border-color: var(--accent);
-  background: rgba(200, 90, 84, 0.12);
+  background: rgba(27, 94, 32, 0.12);
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(62, 39, 35, 0.1);
 }
@@ -376,7 +376,7 @@ body {
 
 .choice-btn:hover:not(:disabled) {
   border-color: var(--accent);
-  background: rgba(200, 90, 84, 0.1);
+  background: rgba(27, 94, 32, 0.1);
   transform: translateX(4px);
   box-shadow: 0 4px 12px rgba(62, 39, 35, 0.06);
 }
@@ -434,13 +434,13 @@ body {
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(200, 90, 84, 0.35);
+  box-shadow: 0 4px 14px rgba(27, 94, 32, 0.35);
 }
 
 .next-btn:hover {
-  background: #b54d47;
+  background: #2e7d32;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(200, 90, 84, 0.4);
+  box-shadow: 0 6px 20px rgba(27, 94, 32, 0.4);
 }
 
 .final-score {
@@ -475,7 +475,7 @@ body {
   background: var(--accent);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(200, 90, 84, 0.25);
+  box-shadow: 0 6px 20px rgba(27, 94, 32, 0.25);
 }
 
 .hidden {
@@ -510,7 +510,7 @@ body {
 
 .contact-btn:hover {
   border-color: var(--accent);
-  background: rgba(200, 90, 84, 0.12);
+  background: rgba(27, 94, 32, 0.12);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(62, 39, 35, 0.08);
 }
@@ -659,13 +659,13 @@ body {
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(200, 90, 84, 0.35);
+  box-shadow: 0 4px 14px rgba(27, 94, 32, 0.35);
 }
 
 .contact-form .submit-btn:hover:not(:disabled) {
-  background: #b54d47;
+  background: #2e7d32;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(200, 90, 84, 0.4);
+  box-shadow: 0 6px 20px rgba(27, 94, 32, 0.4);
 }
 
 .contact-form .submit-btn:disabled {
